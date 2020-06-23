@@ -8,12 +8,13 @@ import {
   Keyboard,
   Alert
 } from 'react-native'
-
 import Card from '../components/Card'
 import Colors from '../constants/colors'
 import Input from '../components/Input'
 import NumberContainer from '../components/NumberContainter'
-
+import BodyText from '../components/BodyText'
+import DefaultStyle from '../constants/default-styles'
+import defaultStyles from '../constants/default-styles';
 
 const StartGame = props => {
 
@@ -46,11 +47,16 @@ const StartGame = props => {
   if(confirmed){
     confirmedOutput = (
       <Card style={styles.summaryContainer}>
-        <Text> Chosen Number:  </Text>
-        <NumberContainer>{selectedNumber}</NumberContainer>
+        <BodyText> 
+          Chosen Number:
+        </BodyText>
+        <NumberContainer>
+          {selectedNumber}
+        </NumberContainer>
         <Button 
           title="START GAME"
-          onPress={() => props.onStartGame(selectedNumber)} />
+          onPress={() => props.onStartGame(selectedNumber)} 
+        />
       </Card>
     )
   }
@@ -60,9 +66,9 @@ const StartGame = props => {
       Keyboard.dismiss()
     }}>
       <View style={styles.screen}> 
-        <Text style={styles.title}>Start a new game</Text>
+        <Text style={{...defaultStyles.title, ...styles.titleMargin}}>Start a new game</Text>
         <Card style={styles.inputContainer}>
-          <Text style={styles.title}>Enter a number</Text>
+          <Text >Enter a number</Text>
           <Input 
             style={styles.input} 
             blurOnSubmit
@@ -78,13 +84,15 @@ const StartGame = props => {
               <Button 
                 title="Reset" 
                 onPress={resetInputHandler} 
-                color={Colors.accent} />
+                color={Colors.accent} 
+              />
             </View>
             <View style={styles.button}>
               <Button 
                 title="Confirm"
                 onPress={confirmInputHandler} 
-                color={Colors.primary} />
+                color={Colors.primary} 
+              />
             </View>
           </View>
         </Card >
@@ -110,8 +118,7 @@ const styles = StyleSheet.create({
   button: {
     width: 90
   },
-  title: {
-    fontSize: 20, 
+  titleMargin: {
     marginVertical: 10
   },
   inputContainer: {

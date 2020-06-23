@@ -33,11 +33,13 @@ const GameScreen = (props) => {
   }, [ currentGuess, userChoice, onGameOver])
 
   const nextGuessHandler = direction => {
-    if((direction === 'lower' && currentGuess < props.userChoice) || (direction === 'upper' && currentGuess > props.userChoice)){
-      Alert.alert('Don\'t lie!', 'You know that this is wrong', [
-        {text: 'Sorry', style: 'cancel'}
-      ])
-      return 
+    if(
+      (direction === 'lower' && currentGuess < props.userChoice) ||
+      (direction === 'greater' && currentGuess > props.userChoice)){
+        Alert.alert('Don\'t lie!', 'You know that this is wrong', [
+          {text: 'Sorry', style: 'cancel'}
+        ])
+        return 
     }
     if(direction === 'lower'){
       currentHigh.current = currentGuess
@@ -54,7 +56,7 @@ const GameScreen = (props) => {
       <Text>Opponent's Guess</Text>
       <NumberContainer>{currentGuess} </NumberContainer>
       <Card style={styles.buttonContainer}>
-        <Button title="LOWER" onPress={nextGuessHandler.bind(this, 'lower')} />
+        <Button title="LOWER" onPress={() => nextGuessHandler('lower')} />
         <Button title="UPPER" onPress={nextGuessHandler.bind(this, 'greater')} />
       </Card>
     </View>
