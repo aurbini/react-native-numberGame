@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, Button, Alert } from 'react-native';
 
 import Card from '../components/Card'
 import NumberContainer from '../components/NumberContainter'
+import MainButton from '../components/MainButton'
 
 const generateRandomBetween = (min, max, exclude) => {
   min = Math.ceil(min)
@@ -14,7 +15,6 @@ const generateRandomBetween = (min, max, exclude) => {
     return rndNum
   }
 }
-
 
 const GameScreen = (props) => {
 
@@ -56,8 +56,16 @@ const GameScreen = (props) => {
       <Text>Opponent's Guess</Text>
       <NumberContainer>{currentGuess} </NumberContainer>
       <Card style={styles.buttonContainer}>
-        <Button title="LOWER" onPress={() => nextGuessHandler('lower')} />
-        <Button title="UPPER" onPress={nextGuessHandler.bind(this, 'greater')} />
+        <MainButton 
+          onPress={() => nextGuessHandler('lower')} 
+        >
+          Lower
+        </MainButton>
+        <MainButton 
+          onPress={nextGuessHandler.bind(this, 'greater')} 
+        >
+          Upper
+        </MainButton>
       </Card>
     </View>
   );
@@ -74,7 +82,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', 
     justifyContent: 'space-around', 
     marginTop: 20, 
-    width: 300, 
+    width: 400, 
     maxWidth: '80%'
   }
 })
